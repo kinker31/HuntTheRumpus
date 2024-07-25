@@ -1,4 +1,10 @@
 #include "mainlib.h"
+#include "mazelib.h"
+
+void StartGame()
+{
+
+}
 
 int main()
 {
@@ -10,8 +16,7 @@ int main()
     while(selection != 'q')
     {
         clear();
-        printw("Make a selection, or press h for help: ");
-        refresh();
+        printw("Make a selection, or press h for help: "); refresh();
         selection = getch();
         printw("%c\n", selection);
         switch(selection)
@@ -22,7 +27,15 @@ int main()
             case 'q':
                 printw("Well, it's been fun, see you next time!\n"); refresh();
                 sleep(1);
+            case 'o':
+                OptionsScreen(&options);
+                break;
+            case 'n':
+                StartGame();
+                break;
             default:
+                printw("Actual value, please.\n"); refresh();
+                sleep(1);
                 break;
         }
     }
