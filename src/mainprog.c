@@ -1,5 +1,10 @@
-#include "mainlib.h"
+#include "menulib.h"
 #include "mazelib.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <ncurses.h>
 
 void StartGame()
 {

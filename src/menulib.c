@@ -1,4 +1,4 @@
-#pragma once
+#include "menulib.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,9 +61,6 @@ void LoadOptions(unsigned short int *op)
     { *op = getw(cfgFile); }
     fclose(cfgFile);
 }
-
-void ToggleOption(unsigned short int pick, unsigned short int *op)
-{ unsigned short int bit = 1 << pick; *op ^= bit; }
 
 void GetOpState(unsigned short int *op, unsigned short int pick, char *str)
 {

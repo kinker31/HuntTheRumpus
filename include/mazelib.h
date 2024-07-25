@@ -6,7 +6,4 @@ struct ent2d
     char property;
 };
 
-void MoveEnt(struct ent2d ent, char dir)
-{
-
-}
+void MoveEnt(struct ent2d *ent, char dir);
