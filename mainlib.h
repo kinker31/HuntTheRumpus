@@ -4,8 +4,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <dirent.h>
 #include <unistd.h>
-#include <curses.h>
+#include <ncurses.h>
+#include <fcntl.h>
+#include <linux/stat.h>
+#include <sys/stat.h>
 
 /*
 Game options are to be stored as an unsigned short int, saved to ~/.config/HuntTheRumps as a small binary file, something like that.
@@ -21,6 +25,16 @@ From MSB to LSB, presuming 1 enables and 0 disables:
 16. Prints the maze per turn, slightly cheat-y.
 */
 
+void InitDirectory()
+{
+    DIR* cfgDir = opendir("~/.config/HuntTheRumpus");
+    if(cfgDir == NULL)
+    {
+        int createDir = mkdir("~/.config/HuntTheRumpus", S_IRWXU);
+    }
+    closedir(cfgDir);
+}
+
 void PrintCommands()
 {
     printw("[H]elp: Prints this screen.\n");
@@ -34,12 +48,18 @@ void PrintCommands()
 
 void SaveOptions(unsigned short int *op)
 {
- //TODO: Find best way of handling Linux file IO
+    FILE* cfgFile = fopen("~/.config/HuntTheRumpus/config.rumpus", 'w');
+    if(cfgFile != NULL)
+    { int write = putc(*op, cfgFile); }
+    fclose(cfgFile);
 }
 
 void LoadOptions(unsigned short int *op)
 {
- //TODO: Find best way of handling Linux file IO
+    FILE* cfgFile = fopen("~/.config/HuntTheRumpus/config.rumpus", 'r');
+    if(cfgFile != NULL)
+    { *op = getw(cfgFile); }
+    fclose(cfgFile);
 }
 
 void ToggleOption(unsigned short int pick, unsigned short int *op)

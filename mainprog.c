@@ -3,7 +3,7 @@
 
 void StartGame()
 {
-
+    
 }
 
 int main()
@@ -11,6 +11,7 @@ int main()
     initscr(); noecho();
     printw("Welcome to Hunt the Rumpus!\n"); refresh();
     sleep(1);
+    InitDirectory();
     char selection;
     unsigned short int options;
     while(selection != 'q')
