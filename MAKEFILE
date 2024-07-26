@@ -1,0 +1,18 @@
+OBJS	= ./src/*.o
+SOURCE	= ./src/*.c
+HEADER	= ./include/*.h
+OUT	= ./build/rumpus.out
+FLAGS	= -g -c -Wall
+LFLAGS	= 
+CC	= gcc
+
+all:	./build/rumpus.out
+
+./build/rumpus.out: $(OBJS)
+	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+
+./src/*.o: ./src/*.c
+	$(CC) $(FLAGS) ./src/*.c -std=c17
+
+clean:
+	rm -f $(OBJS) $(OUT)
