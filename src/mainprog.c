@@ -6,15 +6,17 @@
 #include <stdbool.h>
 #include <ncurses.h>
 
-void MainGameLoop(unsigned short int *op, char *maze[])
+void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
 {
     bool gameOver = false;
     struct player itsYou; InitPlayer(&itsYou, op);
+    struct ent2d *rumpuses; struct ent2d *ronpises;
     RumpusFunc(maze); RonpisFunc(maze);
     while(!gameOver)
     {
         clear();
     }
+    free(rumpuses); free(ronpises);
 }
 
 //Sizes must be bigger than 1 for a map of the proper size to generate; The borders of the matrix is surrounded by wall
@@ -55,7 +57,9 @@ void StartGame(bool customMap, unsigned short int *op)
             break;
     }
     InitMaze(mazeMatrix, i, j);
-    MainGameLoop(op, mazeMatrix);
+    struct point2d mazeMax = {mazeMax.x = i, mazeMax.y = j};
+    MainGameLoop(op, mazeMatrix, mazeMax);
+    free(mazeMatrix);
 }
 
 int main()
