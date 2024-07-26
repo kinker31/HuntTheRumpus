@@ -127,3 +127,15 @@ void OptionsScreen(unsigned short int *op)
         }
     }
 }
+
+void PrintGameCommands()
+{
+    printw("[N]orth, [E]ast, [W]est, and [S]outh: Moves you one tile in the respective direction, if valid.\n");
+    printw("Rumpis [G]un: Primes the Rumpus gun, the same four directions used to fire the thing.\n Make sure you hit a Rumpus.\n");
+    printw("[D]ennis: Summons forth the auditory help of Dennis, who'll give you a hint on where the Rumpus is.\n");
+    printw("[H]elp: Prints this screen.\n");
+    printw("[Q]uit: Makes you instantly die, quitting the game.\n");
+    printw("Please use lowercase keys when selecting, and this menu might change in the future!\n");
+    printw("Press any key to continue.\n"); refresh();
+    char dummyValue = getch();
+}

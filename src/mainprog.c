@@ -9,12 +9,44 @@
 void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
 {
     bool gameOver = false;
+    bool wonGame = false;
+    char playerChoice;
     struct player itsYou; InitPlayer(&itsYou, op);
     struct ent2d *rumpuses; struct ent2d *ronpises;
-    RumpusFunc(maze); RonpisFunc(maze);
+    Ent2DFunc(maze, rumpuses, maxes, 1, 'r'); 
+    Ent2DFunc(maze, ronpises, maxes, 3, 'f');
     while(!gameOver)
     {
         clear();
+        printw("Within the dark caverns, obvious pathways are... \n");
+        printw("What will you do?: "); refresh();
+        playerChoice = getch();
+        printw("/n");
+        switch(playerChoice)
+        {
+            case 'n':
+                break;
+            case 'e':
+                break;
+            case 'w':
+                break;
+            case 's':
+                break;
+            case 'd':
+                break;
+            case 'g':
+                break;
+            case 'h':
+                break;
+            case 'q':
+                printw("Quitting game...\n"); refresh();
+                gameOver = true;
+                break;
+            default:
+                printw("Valid selection, please.\n"); refresh();
+                sleep(1);
+                break;
+        }
     }
     free(rumpuses); free(ronpises);
 }
