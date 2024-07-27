@@ -1,4 +1,7 @@
 # Hunt The Rumpus
+
+## An Backstory
+
 Deep within the Flatland Gridcaves, there lives a really mean, REALLY smelly Rumpus.
 You, a Flatlander, are tasked with killing it. Should be easy, right?
 
@@ -6,7 +9,8 @@ If only the damn Flatland goverment wasn't a cheapskate. Sure, you get a gun mor
 
 It wouldn't be too bad if it weren't for the fact that rumpuses kill Flatlanders really, REALLY good. Like instant-death good.
 
-# The Enclosed Instruction Book
+## The Enclosed Instruction Book
+
 (Treat this with a rock of salt!)
 
 This game works a bit like a text adventure, [n|e|w|s] taking you [north|east|west|south] respectively.
@@ -15,7 +19,8 @@ This game works a bit like a text adventure, [n|e|w|s] taking you [north|east|we
 
 But most of all, don't do a dying, as the Flatlander goverment counts on you! How else will they squander the taxes the citizens pay per year?
 
-# Compilation 'n Stuff
+## Compilation 'n Stuff
+
 Though pre-compiled binaries (and a dedicated AUR package) will be included at a later date, compiling the program manually with GCC should be enough to get it going.
 
 Windows users can use WSL, and if you use a Mac, may god have mercy on your soul.
