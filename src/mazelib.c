@@ -1,18 +1,72 @@
 #include "mazelib.h"
 #include <stdlib.h>
+#include <ncurses.h>
 
-char GetCell(char * maze[], struct point2d p2d)
+#define IF_GOOD_TILE    if(ValidTile(maze, posTemp))
+#define SET_ENTPOS      ent->position = posTemp;
+#define ENT_CHECK       IF_GOOD_TILE {SET_ENTPOS}
+#define SET_PPOS        p->prop.position = posTemp;
+#define P_CHECK         IF_GOOD_TILE {SET_PPOS}
+#define TPOINT          point posTemp
+
+char GetCell(char * maze[], point p2d)
 { return maze[p2d.x][p2d.y]; }
 
+//Assume standard of n|e|w|s
 
 void MoveEnt(struct ent2d *ent, char *maze[])
 {
-
+    unsigned short int randVal = (rand() % 4) + 1;
+    TPOINT = ent->position;
+    switch(randVal)
+    {
+        case 1:
+            posTemp.y += 1;
+            ENT_CHECK
+            break;
+        case 2:
+            posTemp.x += 1;
+            ENT_CHECK
+            break;
+        case 3:
+            posTemp.x -= 1;
+            ENT_CHECK
+            break;
+        case 4:
+            posTemp.y -= 1;
+            ENT_CHECK
+            break;
+        default:
+            break;
+    }
 }
 
 void MovePlayer(struct player *p, char dir, char *maze[])
 {
-
+    TPOINT = p->prop.position;
+    switch(dir)
+    {
+        case 'n':
+            posTemp.y += 1;
+            P_CHECK
+            break;
+        case 'e':
+            posTemp.x += 1;
+            P_CHECK
+            break;
+        case 'w':
+            posTemp.x -= 1;
+            P_CHECK
+            break;
+        case 's':
+            posTemp.y -= 1;
+            P_CHECK
+            break;
+        default:
+            break;
+    }
+    BumpLogic(p, maze);
+    ScanArea(p, maze);
 }
 
 void GetMaxAmounts(unsigned short int x, unsigned short int y, unsigned short int *p, unsigned short int *c, unsigned short int *t)
@@ -62,18 +116,21 @@ void InitMaze(char *maze[], unsigned short int x, unsigned short int y)
     }
 }
 
-bool ValidTile(char *maze[], struct point2d coord)
+void LoadMaze(char *maze[])
+{} //temp an empty useless function, add this later
+
+bool ValidTile(char *maze[], point coord)
 {
     bool result = false;
-    if(maze[coord.x][coord.y] != '#')
+    if(GetCell(maze, coord) != '#')
     {result = true;}
     return result;
 }
 
-void Ent2DFunc(char *maze[], struct ent2d *ents, struct point2d maxes, unsigned short int maxAmount, char type)
+void Ent2DFunc(char *maze[], struct ent2d *ents, point maxes, unsigned short int maxAmount, char type)
 {
     ents = malloc(sizeof(struct ent2d) * maxAmount);
-    struct point2d coordinate;
+    point coordinate;
     for(unsigned short int i = 0; i < maxAmount; i++)
     {
         ents[i].property = type;
@@ -81,4 +138,61 @@ void Ent2DFunc(char *maze[], struct ent2d *ents, struct point2d maxes, unsigned 
         while(ValidTile(maze, coordinate));
         ents[i].position = coordinate;
     }
+}
+
+void PitMercyFunc(player_s, maze_s)
+{
+    //implement soon-ish
+}
+
+void DennisFunc(player_s, maze_s)
+{
+    //implement soon-ish
+}
+
+void FoundTeleporter(player_s, short int xMax, short int yMax)
+{
+    //implement soon-ish
+}
+
+void FoundRumpus()
+{
+    //implement soon-ish
+}
+
+void CheckEnts(point)
+{
+    //implement soon-ish
+}
+
+void FoundRonpis()
+{
+    //implement soon-ish
+}
+
+void GunLogic(player_s, maze_s)
+{
+    //implement soon-ish
+}
+
+void FoundCorpse(player_s)
+{
+    //implement soon-ish
+}
+
+void FoundPit(player_s)
+{
+    //implement soon-ish
+}
+
+void ScanArea(struct player *p, char *maze[])
+{
+    TPOINT = p->prop.position;
+    //implement function later
+}
+
+void BumpLogic(struct player *p, char *maze[])
+{
+    TPOINT = p->prop.position;
+    char tileLogic = GetCell(maze, posTemp);
 }

@@ -1,6 +1,12 @@
 #pragma once
 #include <stdbool.h>
 
+#define player_s    struct player *p
+#define ent_s       struct ent2d *ent
+#define maze_s      char *maze[]
+#define XY_PAIR     unsigned short int x, unsigned short int y
+#define point       struct point2d
+
 /*
 Char Legend
 #: Wall
@@ -30,15 +36,16 @@ struct player
     bool dennis;
     unsigned short int pitMercies;
 };
-char GetCell(char *maze[], struct point2d p2d);
-void MoveEnt(struct ent2d *ent, char *maze[]);
-void MovePlayer(struct player *p, char dir, char *maze[]);
-char RandTile(unsigned short int *p, unsigned short int *c, unsigned short int *t);
-void GetMaxAmounts(unsigned short int x, unsigned short int y, unsigned short int *p, unsigned short int *c, unsigned short int *t);
-void InitMaze(char *maze[], unsigned short int x, unsigned short int y);
 
-void LoadMaze(char *maze[]);
-void InitPlayer(struct player *p, unsigned short int *op)
+char GetCell(maze_s, struct point2d p2d);
+void MoveEnt(ent_s, maze_s);
+void MovePlayer(player_s, char dir, maze_s);
+char RandTile(unsigned short int *p, unsigned short int *c, unsigned short int *t);
+void GetMaxAmounts(XY_PAIR, unsigned short int *p, unsigned short int *c, unsigned short int *t);
+void InitMaze(maze_s, XY_PAIR);
+
+void LoadMaze(maze_s);
+void InitPlayer(player_s, unsigned short int *op)
 {
     p->prop.position.x = 1;
     p->prop.position.y = 1;
@@ -47,15 +54,16 @@ void InitPlayer(struct player *p, unsigned short int *op)
     p->dennis = true;
     p->pitMercies = 0;
 }
-bool ValidTile(char *maze[], struct point2d coord);
-void Ent2DFunc(char *maze[], struct ent2d *ents, struct point2d maxes, unsigned short int maxAmount, char type);
-void PitMercyFunc(struct player *p, char *maze[]);
-void ExtraDennisFunc(struct player *p, char *maze[]);
-void ScanArea(struct player *p, char *maze[]);
-void BumpLogic(struct player *p, char *maze[]);
-void FoundTeleporter(struct player *p, short int xMax, short int yMax);
+bool ValidTile(maze_s, struct point2d coord);
+void Ent2DFunc(maze_s, ent_s, struct point2d maxes, unsigned short int maxAmount, char type);
+void PitMercyFunc(player_s, maze_s);
+void DennisFunc(player_s, maze_s);
+void FoundTeleporter(player_s, short int xMax, short int yMax);
 void FoundRumpus();
 void FoundRonpis();
-void GunLogic(struct player *p, char dir, char *maze[]);
-void FoundCorpse(struct player *p);
-void FoundPit(struct player *p);
+void GunLogic(player_s, maze_s);
+void FoundCorpse(player_s);
+void FoundPit(player_s);
+void CheckEnts(point);
+void ScanArea(player_s, maze_s);
+void BumpLogic(player_s, maze_s);

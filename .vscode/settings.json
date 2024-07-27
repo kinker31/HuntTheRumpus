@@ -1,3 +1,6 @@
 {
-    "C_Cpp.default.compilerPath": "/sbin/gcc"
+    "C_Cpp.default.compilerPath": "/sbin/gcc",
+    "files.associations": {
+        "mazelib.h": "c"
+    }
 }

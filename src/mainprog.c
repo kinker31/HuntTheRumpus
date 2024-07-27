@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <ncurses.h>
 
+#define MOVE_PLAYER MovePlayer(&itsYou, playerChoice, maze)
+
 void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
 {
     bool gameOver = false;
@@ -24,19 +26,22 @@ void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
         printw("/n");
         switch(playerChoice)
         {
+            //All four directions function essentially the same
             case 'n':
-                break;
             case 'e':
-                break;
             case 'w':
-                break;
             case 's':
+                MOVE_PLAYER;
                 break;
+
             case 'd':
+                DennisFunc(&itsYou, maze);
                 break;
             case 'g':
+                GunLogic(&itsYou, maze);
                 break;
             case 'h':
+                PrintGameCommands();
                 break;
             case 'q':
                 printw("Quitting game...\n"); refresh();
