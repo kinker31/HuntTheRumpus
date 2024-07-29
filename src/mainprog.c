@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <ncurses.h>
 
-#define MOVE_PLAYER MovePlayer(&itsYou, playerChoice, maze)
+#define MOVE_PLAYER MovePlayer(&itsYou, playerChoice, maze, &gameOver, &previousPos)
 
 void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
 {
@@ -15,15 +15,15 @@ void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
     char playerChoice;
     struct player itsYou; InitPlayer(&itsYou, op);
     struct ent2d *rumpuses; struct ent2d *ronpises;
+    struct point2d previousPos = {previousPos.x = 1, previousPos.y = 1};
     Ent2DFunc(maze, rumpuses, maxes, 1, 'r'); 
     Ent2DFunc(maze, ronpises, maxes, 3, 'f');
     while(!gameOver)
     {
-        clear();
         printw("Within the dark caverns, obvious pathways are... \n");
         printw("What will you do?: "); refresh();
         playerChoice = getch();
-        printw("/n");
+        clear();
         switch(playerChoice)
         {
             //All four directions function essentially the same
@@ -31,6 +31,7 @@ void MainGameLoop(unsigned short int *op, char *maze[], struct point2d maxes)
             case 'e':
             case 'w':
             case 's':
+                previousPos = itsYou.prop.position;
                 MOVE_PLAYER;
                 break;
 
